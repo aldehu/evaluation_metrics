@@ -14,7 +14,9 @@ To run the scripts in python, you will need the pystan package. More details in 
 
 ## File description
 
-1 . **simL3N5000.py**:
+1. **simL3N5000.py**:
 It contains a Python script to perform simulations based on a Power Cauchy distribution. The purpose of this code is to generate simulated data with a parameter λ=3 and a sample size of 5000, replicating this process 100 times. For each replica, various metrics are calculated. Please refer to Section 4 of the article for details.
+
 2. **Figure**: It contains R scripts to generate Figure 5 and Table 6 of the paper, with the simulation results.
-3. **Table**: It contains R scripts to generate Table 7 of the paper, with the simulation results.
+   
+4. **Table**: It contains R scripts to generate Table 7 of the paper, with the simulation results.
