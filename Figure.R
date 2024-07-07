@@ -48,17 +48,6 @@ KAPPA_k = select(m.data, KAPPA_kpc, KAPPA_kl)
 R = nrow(m.data)
 model = as.factor(c(rep("PC", R), rep("Logistic", R)))
 
-# AUC
-auc = data.frame("auc" = c(AUC_k[,1], AUC_k[,2]),
-                 "model" = model)
-head(auc)
-# Histogram plot AUC
-library(ggplot2)
-ggplot(auc, aes(x = auc, fill = model)) +
-  ylab("frecuency") +
-  geom_histogram(alpha = 0.5, position = "identity", binwidth=0.002)
-
-
 # ALL METRICS BY MODEL FOR K
 K = 13
 model = as.factor(rep(c(rep("PC", R), rep("Logistic", R)),K))
@@ -87,52 +76,10 @@ dataf1 = data.frame(value = c(AUC_k[,1], AUC_k[,2],
 dataf1$metric = ordered(dataf1$metric,
                         levels = c("AUC", "ACC", "TPR", "TNR", "CSI", "SGS", "SSI",
                                    "FAITH", "SPDIF", "MCC", "GM", "F1", "KAPPA"))
-head(dataf1)
-
-# Histogram plor by metrics
-ggplot(dataf1, aes(x = value)) +
-  geom_histogram(aes(fill = model), alpha = 0.7, position = "identity")  +
-  ylab("Frequency") +
-  facet_wrap(~ metric, nrow=4, scales = "free") +
-  #guides(fill = FALSE) +  # to remove the legend
-  theme_bw() # for clean look overall
-
-# ECDF and test KS AUC
-group = model[1:(2*R)]
-sample1 = AUC_k[,1]
-sample2 = AUC_k[,2]
-
-dat <- data.frame(KSD = c(sample1,sample2), Model = group)
-# create ECDF of data
-cdf1 <- ecdf(sample1) 
-cdf2 <- ecdf(sample2) 
-
-# find min and max statistics to draw line between points of greatest distance
-minMax <- seq(min(sample1, sample2), max(sample1, sample2), length.out=length(sample1)) 
-x0 <- minMax[which( abs(cdf1(minMax) - cdf2(minMax)) == max(abs(cdf1(minMax) - cdf2(minMax))) )] 
-y0 <- cdf1(x0) 
-y1 <- cdf2(x0) 
-
-library(ggplot2)
-ggplot(dat, aes(x = KSD, group = Model, colour = Model, linetype=Model))+
-  stat_ecdf(size=1) +
-  xlab("Sample") +
-  ylab("Cumulitive Distibution") +
-  geom_segment(aes(x = x0[1], y = y0[1], xend = x0[1], yend = y1[1]),
-               linetype = "dashed", color = "red") +
-  geom_point(aes(x = x0[1] , y= y0[1]), color="red", size=3) +
-  geom_point(aes(x = x0[1] , y= y1[1]), color="red", size=3) #+
-#ggtitle("K-S Test: Sample 1 / Sample 2")
-
-#K-S test
-ks.ts <- ks.test(sample1, sample2, alternative = "two.sided")
-ks.ts
-
-# ECDF and test KS by metrics
-head(dataf1)
 
 # ECDF plots by metrics
 require(dplyr)
+library(ggplot2)
 dataf1 %>%  
   ggplot(aes(x=value, linetype=model))+ 
   stat_ecdf(size=1.05)+
@@ -152,29 +99,6 @@ cairo_ps(filename = "ECDFkappaN5000L3.eps",
          fallback_resolution = 300)
 print(gecdf025)
 dev.off()
-
-
-
-# Calculate Min, Max by metric
-data.m2 <- dataf1 %>%
-  group_by(metric) %>%
-  mutate(
-    Max = max(value, na.rm = T),
-    Min = min(value, na.rm = T)
-  ) %>%
-  arrange(metric)
-
-nrow(data.m2)
-
-# Order level of metric
-data.m2$model = ordered(data.m2$model,
-                        levels = c("PC", "Logistic"))
-
-# Calculate ECDF by metric and model
-library(dplyr)
-data.m3 <- data.m2 %>% 
-  group_by(metric, model) %>%
-  do(data.frame(., ecdf = ecdf(.$value)(.$value)))
 
 # K.S test
 #auc_pc = data.m %>% filter(metric == "auc" & model == "PC")
@@ -222,14 +146,11 @@ aux2 = rbind.data.frame(m1,m2,m3,m4,m5,m6,m7,m8,m9,m10, m11, m12, m13)
 aux2 = as.data.frame(aux2)
 row.names(aux2) = c("AUC", "ACC", "TPR", "TNR", "CSI", "SGS", "SSI",
                     "FAITH", "SPDIF", "MCC", "GM", "F1", "KAPPA")
-ktest_k = aux2[,c(1,2)]
 
-
-ktest = cbind(ktest_f1, ktest_k)
-colnames(ktest) = c("statistic_f1", "p.value_f1", "statistic_k", "p.value_k")
+colnames(aux2) = c("statistic_k", "p.value_k")
 
 library(openxlsx)
-write.xlsx(ktest, file = "ks_test_L3N5000.xlsx", rowNames=T)
+write.xlsx(aux2, file = "ks_test_L3N5000.xlsx", rowNames=T)
 
 
 
