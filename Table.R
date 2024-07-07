@@ -27,50 +27,6 @@ m.data$GS_f1pc = (3*m.data$GS_f1pc+1)/4
 m.data$GS_kl = (3*m.data$GS_kl+1)/4
 m.data$GS_kpc = (3*m.data$GS_kpc+1)/4
 
-## ANALISE FOR F1
-# Select variables
-if(!require(dplyr)){install.packages("dplyr")}
-library(dplyr)
-# base f1
-AUC_f1 = select(m.data, AUC_f1pc, AUC_f1l)
-ACC_f1 = select(m.data, ACC_f1pc, ACC_f1l)
-TPR_f1 = select(m.data, TPR_f1pc, TPR_f1l)
-TNR_f1 = select(m.data, TNR_f1pc, TNR_f1l)
-CSI_f1 = select(m.data, CSI_f1pc, CSI_f1l)
-GS_f1 = select(m.data, GS_f1pc, GS_f1l)
-SSI_f1 = select(m.data, SSI_f1pc, SSI_f1l)
-FAITH_f1 = select(m.data, FAITH_f1pc, FAITH_f1l)
-PDIF_f1 = select(m.data, PDIF_f1pc, PDIF_f1l)
-MCC_f1 = select(m.data, MCC_f1pc, MCC_f1l)
-G_M_f1 = select(m.data, G_M_f1pc, G_M_f1l)
-F1_f1 = select(m.data, F1_f1pc, F1_f1l)
-KAPPA_f1 = select(m.data, KAPPA_f1pc, KAPPA_f1l)
-
-# COMPARING
-R = nrow(m.data)
-m1 = (sum(ifelse(AUC_f1[,1]>AUC_f1[,2], 1, 0))/R)*100
-m2 = (sum(ifelse(ACC_f1[,1]>ACC_f1[,2], 1, 0))/R)*100 
-m3 = (sum(ifelse(TPR_f1[,1]>TPR_f1[,2], 1, 0))/R)*100 
-m4 = (sum(ifelse(TNR_f1[,1]>TNR_f1[,2], 1, 0))/R)*100 
-m5 = (sum(ifelse(CSI_f1[,1]>CSI_f1[,2], 1, 0))/R)*100 
-m6 = (sum(ifelse(GS_f1[,1]>GS_f1[,2], 1, 0))/R)*100
-m7 = (sum(ifelse(SSI_f1[,1]>SSI_f1[,2], 1, 0))/R)*100
-m8 = (sum(ifelse(FAITH_f1[,1]>FAITH_f1[,2], 1, 0))/R)*100 
-m9 = (sum(ifelse(PDIF_f1[,1]>PDIF_f1[,2], 1, 0))/R)*100 
-m10 = (sum(ifelse(MCC_f1[,1]>MCC_f1[,2], 1, 0))/R)*100
-m11 = (sum(ifelse(G_M_f1[,1]>G_M_f1[,2], 1, 0))/R)*100
-m12 = (sum(ifelse(F1_f1[,1]>F1_f1[,2], 1, 0))/R)*100
-m13 = (sum(ifelse(KAPPA_f1[,1]>KAPPA_f1[,2], 1, 0))/R)*100
-
-
-aux1 = rbind.data.frame(m1,m2,m3,m4,m5,m6,m7,m8,m9,m10, m11, m12, m13)
-aux1 = as.data.frame(aux1)
-row.names(aux1) = c("AUC", "ACC", "TPR", "TNR", "CSI", "SGS", "SSI",
-                    "FAITH", "SPDIF", "MCC", "GM", "F1", "KAPPA")
-colnames(aux1) = c("Percentage")
-
-
-
 ## ANALISE FOR KAPPA
 # base kappa
 AUC_k = select(m.data, AUC_kpc, AUC_kl)
@@ -109,13 +65,10 @@ aux2 = rbind.data.frame(m1,m2,m3,m4,m5,m6,m7,m8,m9,m10, m11, m12, m13)
 aux2 = as.data.frame(aux2)
 row.names(aux2) = c("AUC", "ACC", "TPR", "TNR", "CSI", "SGS", "SSI",
                     "FAITH", "SPDIF", "MCC", "GM", "F1", "KAPPA")
-colnames(aux2) = c("Percentage")
-
-props = cbind(aux1, aux2)
-colnames(props) = c("Percentage_f1", "Percentage_k")
+colnames(aux2) = c("Percentage_k")
 
 library(openxlsx)
-write.xlsx(props, file = "proportions_L3N5000.xlsx", rowNames=T)
+write.xlsx(aux2, file = "proportions_L3N5000.xlsx", rowNames=T)
 
 
 
