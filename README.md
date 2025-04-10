@@ -4,6 +4,7 @@
 
 <sup>1</sup>Inter-Institutional Graduation Program in Statistics, USP/UFSCar,
 São Carlos, Brazil.
+<sup>1</sup>Department of Sciences, Pontificia Universidad Católica del Perú, Lima, Peru.
 <sup>2,3</sup> Department of Applied Mathematics and Statistics, University of São
 Paulo, São Carlos, Brazil.
 
