@@ -29,19 +29,11 @@ Alex de la Cruz H., Jorge L. Bazán, and Cibele M. Russo (2024). Python code: Pe
 If you prefer to include it as a BibTeX entry:
 
 @misc{delacruz2024python,
-
-  author       = {Alex de la Cruz H and Jorge L. Bazán and Cibele M. Russo},
-  
-  title        = {Python code: Performance of evaluation metrics for classification in imbalanced data},
-  
-  year         = {2024},
-  
-  version      = {v1.0},
-  
-  doi          = {10.5281/zenodo.15190124},
-  
-  url          = {https://doi.org/10.5281/zenodo.15190124},
-  
-  note         = {Zenodo}
-  
+  author       = {Alex de la Cruz H and Jorge L. Bazán and Cibele M. Russo}, <b>  
+  title        = {Python code: Performance of evaluation metrics for classification in imbalanced data},  
+  year         = {2024},  
+  version      = {v1.0},  
+  doi          = {10.5281/zenodo.15190124},  
+  url          = {https://doi.org/10.5281/zenodo.15190124},  
+  note         = {Zenodo}  
 }
