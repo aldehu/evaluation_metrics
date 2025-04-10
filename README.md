@@ -19,3 +19,19 @@ To run the scripts in python, you will need the pystan package. More details in 
 
 **simL3N5000.py**:
 It contains a Python script to perform simulations based on a Power Cauchy distribution. The purpose of this code is to generate simulated data with a parameter λ=3 and a sample size of 5000, replicating this process 100 times. For each replica, various metrics are calculated. Please refer to Section 4 of the article for details.
+
+## How to cite this repository
+
+To cite this repository, please use the following reference:
+Alex de la Cruz H., Jorge L. Bazán, and Cibele M. Russo (2024). Python code: Performance of evaluation metrics for classification in imbalanced data. Version v1.0. DOI: https://doi.org/10.5281/zenodo.15190124
+
+If you prefer to include it as a BibTeX entry:
+@misc{delacruz2024python,
+  author       = {Alex de la Cruz H and Jorge L. Bazán and Cibele M. Russo},
+  title        = {Python code: Performance of evaluation metrics for classification in imbalanced data},
+  year         = {2024},
+  version      = {v1.0},
+  doi          = {10.5281/zenodo.15190124},
+  url          = {https://doi.org/10.5281/zenodo.15190124},
+  note         = {Zenodo}
+}
