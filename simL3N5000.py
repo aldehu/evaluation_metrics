@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import pystan
 from sklearn.metrics import f1_score, cohen_kappa_score 
+from sklearn.metrics import matthews_corrcoef
 from sklearn.metrics import roc_auc_score, confusion_matrix
 
 ## FUNCTIONS
@@ -38,7 +39,7 @@ def mat_con(y_obs, y_score, thr):
     SSI = (TP)/(TP+2*FP+2*FN)
     FAITH = (TP+0.5*TN)/(TP+TN+FP+FN)
     PDIF = (4*FP*FN)/((TP+TN+FP+FN)**2)
-    MCC = (TP * TN - FP * FN) / np.sqrt((TP + FP)*(TP + FN)*(TN + FP)*(TN + FN))
+    MCC = matthews_corrcoef(y_obs, y_pred)
     G_M = np.sqrt(TPR*TNR)
     F1 = f1_score(y_obs, y_pred)
     KAPPA = cohen_kappa_score(y_obs, y_pred)
