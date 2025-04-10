@@ -28,8 +28,8 @@ Alex de la Cruz H., Jorge L. Bazán, and Cibele M. Russo (2024). Python code: Pe
 
 If you prefer to include it as a BibTeX entry:
 
-@misc{delacruz2024python,<b> 
-  author       = {Alex de la Cruz H and Jorge L. Bazán and Cibele M. Russo}, <b>  
+@misc{delacruz2024python, <b> 
+  author       = {Alex de la Cruz H and Jorge L. Bazán and Cibele M. Russo},
   title        = {Python code: Performance of evaluation metrics for classification in imbalanced data},  
   year         = {2024},  
   version      = {v1.0},  
