@@ -9,6 +9,8 @@ Paulo, São Carlos, Brazil.
 
 **Corresponding author:** Alex de la Cruz Huayanay, aldehu@alumni.usp.br
 
+This material serves as a supplementary resource to the paper "Performance of Evaluation Metrics for Classification in Imbalanced Data" (https://doi.org/10.1007/s00180-024-01539-5)
+
 ## Previous installations
 To run the scripts in python, you will need the pystan package. More details in https://mc-stan.org/users/interfaces/pystan.
 
